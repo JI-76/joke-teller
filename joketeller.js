@@ -22,19 +22,6 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 
 // test();
 
-// This is function to pass a Joke to the VoiceRSS Text to Speech API
-function test() {
-    VoiceRSS.speech({
-        key: '49ef90548459472c9461d00fd274f38e',
-        src: 'Hello, world!',
-        hl: 'en-us',
-        r: 0, 
-        c: 'mp3',
-        f: '44khz_16bit_stereo',
-        ssml: false
-});
-}
-
 // Passing Joke to VoiceRSS API
 function tellMe(joke) {
   //console.log('tell me:', joke);
