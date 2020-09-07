@@ -22,22 +22,53 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 
 // test();
 
+// This is function to pass a Joke to the VoiceRSS Text to Speech API
+function test() {
+    VoiceRSS.speech({
+        key: '49ef90548459472c9461d00fd274f38e',
+        src: 'Hello, world!',
+        hl: 'en-us',
+        r: 0, 
+        c: 'mp3',
+        f: '44khz_16bit_stereo',
+        ssml: false
+});
+}
+
+// Passing Joke to VoiceRSS API
+function tellMe(joke) {
+  //console.log('tell me:', joke);
+  VoiceRSS.speech({
+    key: '49ef90548459472c9461d00fd274f38e',
+    src: joke,
+    hl: 'en-us',
+    r: 0, 
+    c: 'mp3',
+    f: '44khz_16bit_stereo',
+    ssml: false
+});
+}
+
 // Get Jokes from Joke API
 // Use this vs promise 
 async function getJokes() {
     let joke = '';
     const apiUrl = 'https://sv443.net/jokeapi/v2/joke/Programming';
+
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-    //   check if joke is single or twopart and format accordingly
+    //   check if joke is single or twopart; format accordingly
       if (data.setup) {
-        //   use backtics for variables embedded in strings
+        // twopart format - use backtics for variables embedded in strings
         joke = `${data.setup} ... ${data.delivery}`;
       } else {
+        // single format
           joke = data.joke;
       }
-      console.log(joke);
+      // Pass joke to VoiceRSS API via function tellMe()
+      tellMe(joke);
+      //console.log(joke);
       //console.log(data);
       //console.log(data.joke);
     
